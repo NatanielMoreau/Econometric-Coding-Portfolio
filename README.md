@@ -2,5 +2,5 @@
 
 ### Independent Projects
 
-- [intergenerational mobility](https://raw.githack.com/NatanielMoreau/Econometric-Coding-Portfolio/master/StandAlone/.gitkeep)
+- [intergenerational mobility](Stand Alone/.gitkeep)
 
