@@ -1,0 +1,133 @@
+---
+title: "DID"
+author: "Nataniel Moreau"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+# Prep --------------------------------------------------------------------
+library(pacman)
+p_load(tidyverse, ggthemes, sandwich, fixest, haven, skimr, magrittr, lfe, stargazer)
+
+# DATA
+nbp_data <- read_dta("nbp.dta")
+# Numeric vars -> Factors 
+nbp_data %<>% mutate(year = as.factor(year), 
+                     fips_county = as.factor(fips_county), 
+                     fips_state = as.factor(fips_state))
+# Appendix subsets
+nbp_A = nbp_data %>% filter(nbp == 1)
+nbp_B = nbp_data %>% filter(nbp == 0)
+```
+
+#### 1: NBP Program 
+
+* a: When nbp is equal to one, than that observation comes from a state that implemented the NBP cap and trade program within their state. 
+* b: When summer is equal to one than the observation was recorded during the months of May through September when the nbp program was active.
+* c: When post is equal to one than the year is between 2004-2007 which were the main operating years. Some states were active during 2003 and receive a post value of .5 for that year. 
+
+#### 2: Panel A Replication  
+
+```{r fig.height=5, fig.width=5.5, message=FALSE, warning=FALSE, echo=FALSE}
+# Appendix A graph. NBP states summer vs winter months 
+nbp_data %>% mutate(summer = as_factor(summer)) %>% filter(nbp == 1) %>% 
+  ggplot(aes(year, nox_emit, group = summer, color = summer)) + 
+  stat_summary(fun = "mean", geom = "point", size = 2.5) +  #dots
+  stat_summary(fun = "mean", geom="line", size = 1) +       #lines
+  geom_vline(xintercept = "2002") +                         #Treatment
+  labs(title = "Summer-Equivalent Seasonal NOx Emissions (Mil. Tons)",
+       subtitle = "States Participating in NBP")+
+  scale_color_discrete(labels = c("Winter", "Summer"), 
+                       name = "Season")+
+  theme(legend.position = "bottom", 
+        plot.title = element_text(hjust = .5), 
+        plot.subtitle = element_text(hjust = .5), 
+        plot.background = element_rect(fill = "grey70"))
+
+```
+
+#### 3: Identifying Assumption
+
+The parallel trends assumption requires that had the treatment not been applied, both groups would have continued along parallel trends. Nothing jumps out as extremely worrying when looking at the trend history. The treatment group (blue) seems to possibly be separating from control right at the cut off; control might by plateauing while summer trends downwards but given the previous deviation and convergence even if they did diverge for a period the parallel trends will likely hold. 
+
+#### 4: Appendix A Diff-in-Diff 
+
+To quantify the relationship in 3 I'll run the following DID specification on nbp states: 
+$$NO_x =  summer*post+ post + summer + \epsilon$$
+
+```{r, warning=FALSE, message=FALSE, results='asis', echo=FALSE}
+# DID regular OLS: nbp states
+nbp_ols = lm(nox_emit ~ summer*post + summer + post, data = nbp_A)
+
+# DID clustered SE: nbp states
+nbp_clstr = felm(nox_emit ~ summer*post + summer + post | 0 | 0 | fips_county + fips_state + year, data = nbp_A)
+
+# table
+stargazer(nbp_ols, nbp_clstr, type = "latex", keep.stat = c("f", "adj.rsq", "n"), dep.var.caption = "NOx emmisions")
+```
+In the average county, my DID model finds that the NBP program induced a 373 ton decrease in NOx emissions.
+
+#### 5: Panel B Replication
+
+```{r fig.height=5, fig.width=5.5, message=FALSE, warning=FALSE, echo=FALSE}
+# Appendix B graph. Non-NBP states summer vs winter months 
+nbp_B %>% mutate(summer = as_factor(summer)) %>% 
+  ggplot(aes(year, nox_emit, group = summer, color = summer)) + 
+  stat_summary(fun = "mean", geom = "point", size = 2.5) +  #dots
+  stat_summary(fun = "mean", geom="line", size = 1) +       #lines  
+  labs(title = "Summer-Equivalent Seasonal NOx Emissions (Mil. Tons)",
+       subtitle = "States Not Participating in NBP")+
+  scale_color_discrete(labels = c("Winter", "Summer"), 
+                       name = "Season")+
+  theme(legend.position = "bottom", 
+        plot.title = element_text(hjust = .5), 
+        plot.subtitle = element_text(hjust = .5), 
+        plot.background = element_rect(fill = "grey70"))
+```
+
+#### 6: Placebo Test
+
+The Placebo test adds additional robustness to the counter factual of parallel trends. Additionally, placebo tests are used to find noise or issues the data. Given that there is no treatment effect in these states there should be no significant changes or deviations in emissions from their previous trends. 
+
+#### 7: Appendix B Diff-in-Diff
+
+I will run the same specification as in 4 but on non-nbp states: 
+
+$$NO_x =  summer*post+ post + summer + \epsilon$$
+```{r, warning=FALSE, message=FALSE, results='asis', echo=FALSE}
+# DID regular OLS: Non-nbp states
+non_nbp_ols = lm(nox_emit ~ summer*post + summer + post, data = nbp_B)
+
+# DID clustered SE: Non-nbp states
+non_nbp_clstr = felm(nox_emit ~ summer*post + summer + post | 0 | 0 | fips_county + fips_state + year, data = nbp_B)
+
+stargazer(non_nbp_ols, non_nbp_clstr, type = "latex", keep.stat = c("f", "adj.rsq", "n"), 
+          dep.var.caption = "NOx emissions")
+```
+
+Despite there not being any treatment in these states my placebo test still found a significant coeff. of a 42 ton decrease in NOx emissions. 
+
+#### 8: Triple Difference
+
+My triple difference specification now allows for variation in nbp status through its dummy as well as interactions and has a triple interaction for the triple difference:
+
+$$NO_x =  nbp*summer*post + post*nbp + summer*nbp + summer*post + nbp +post + summer +\epsilon$$
+```{r fig.height=7, fig.width=7, message=FALSE, warning=FALSE, results='asis', echo=FALSE}
+trip_diff = felm(nox_emit ~ nbp + post + summer + 
+                   nbp*post + nbp*summer + post*summer + 
+                   nbp*post*summer | 0 | 0 |fips_county + fips_state + year, data = nbp_data)
+
+stargazer(trip_diff, type = "latex", keep.stat = c("f", "adj.rsq", "n"), 
+          dep.var.caption = "NOx emissions")
+```
+
+My DDD model estimates the causal effect of the NBP program to be a reduction of 331 tons of NOx in the average county. The coefficient on the triple interaction happens to be the coefficient from my first DID model on NBP states minus the placebo test. It would seem as though the double difference still had bias that needed to be corrected. 
+
+
+#### 9. 
+The NBP program is an example of how policy can effectively be leveraged to reduce harmful pollutants and their accompanying adverse effects. With the use of stringent emission limits and open-market compliance mechanisms, the NBP has effectively improved air quality, decreased respiratory illnesses, and mitigated environmental damage caused by NOx pollution. Through study with quasi-experimental methods, the causal impact of a single summer of NBP regulations was estimated to be a decrease in ~331 tons of NOx in the average county. On aggregate that correlates to a total of around ~392,500 tons of NOx abated in the 1,200 counties recorded in the NBP states. Spanning this across the entire 4-year length of the program, an estimated 1,569,884 tons of NOx has been removed. 
