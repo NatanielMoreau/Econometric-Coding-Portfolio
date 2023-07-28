@@ -12,19 +12,19 @@
 
 ### Writing & Interests 
 
-- [The Developmental Consequences of Superfund Sites" referee report]
+- [The Developmental Consequences of Superfund Sites" referee report](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Writing%20%26%20Interests/The%20Developmental%20Consequences%20of%20Superfund%20Sites%22%20referee%20report)
 
-- [Lobbying in Insulin Pricing]
+- [Lobbying in Insulin Pricing](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Writing%20%26%20Interests/Lobbying%20in%20Insulin%20Pricing)
 
-- [Minimum Wage Lit Review]
+- [Minimum Wage Lit Review](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Writing%20%26%20Interests/Minimum%20Wage%20Lit%20Review)
 
-- [Minimum Wage Policy Memo]
+- [Minimum Wage Policy Memo](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Writing%20%26%20Interests/Minimum%20Wage%20Policy%20Memo)
 
 ### Group\Guided Work
 
-- [Regression Discontinuity: Class Sizes and Test Scores]
+- [Regression Discontinuity: Class Sizes and Test Scores](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Group%5CGuided%20Work/Regression%20Discontinuity%3A%20Class%20Sizes%20and%20Test%20Scores)
 
-- [DID & DDD: Cap and Trade, Ozone Emission Reduction]
+- [DID & DDD: Cap and Trade, Ozone Emission Reduction](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Group%5CGuided%20Work/DID%20%26%20DDD%3A%20Cap%20and%20Trade%2C%20Ozone%20Emission%20Reduction)
 
-- [Classification & Regression Prediction Modeling]
+- [Classification & Regression Prediction Modeling](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Group%5CGuided%20Work/Classification%20%26%20Regression%20Prediction%20Modeling)
   
