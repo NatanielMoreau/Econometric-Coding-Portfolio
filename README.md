@@ -1,4 +1,4 @@
-# Econometric-Coding-Portfolio
+# Economic-Coding-Portfolio
 
 ## About
 - Collection of projects, blogs, and assignments displaying my skills and interests across different econometric settings. Includes guided coursework as well as independent projects.
