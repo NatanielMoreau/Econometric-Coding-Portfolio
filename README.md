@@ -1,7 +1,7 @@
 # Economic-Coding-Portfolio
 
 ## About
-- Collection of projects, blogs, and assignments displaying my data skills including cleaning, generation, visualization, and regression & analysis. Includes guided coursework as well as independent projects in my areas of interest including environmetalism, healthcare, and educational equity. 
+- Collection of projects, blogs, and assignments displaying my data skills including cleaning, generation, visualization, and analysis. Includes guided coursework as well as independent projects in my areas of interest including environmetalism, healthcare, and educational equity. 
 
 ### Independent Projects
 
