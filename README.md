@@ -1,5 +1,9 @@
 # Econometric-Coding-Portfolio
 
+## About
+- Collection of projects, blogs, and assignments displaying my skills and interests across different econometric settings. Includes guided coursework as well as independent projects.
+
+
 ### Independent Projects
 
 - [Intergenerational Mobility](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/5eba95b920d534bb1328ea44912209352d365714/Independent%20Projects/Intergenerational%20Mobility)
