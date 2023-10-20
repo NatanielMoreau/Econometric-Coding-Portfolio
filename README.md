@@ -31,3 +31,4 @@
 
 - [Classification & Regression Prediction Modeling](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Group%5CGuided%20Work/Classification%20%26%20Regression%20Prediction%20Modeling)
   
+- [Economic Forecasting](https://github.com/NatanielMoreau/Economic-Portfolio/tree/272c4952677cfa2b1ff1bc9702225a0e83a3f057/Group%5CGuided%20Work/Economic%20Forecasting)
