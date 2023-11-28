@@ -21,7 +21,7 @@
 
 - [Minimum Wage Lit Review](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Writing%20%26%20Interests/Minimum%20Wage%20Lit%20Review)
 
-- [Minimum Wage Policy Memo](https://github.com/NatanielMoreau/Econometric-Portfolio/tree/a703a79a2003b6624e594f79d1c45b6793b1d28a/Writing%20%26%20Interests/Minimum%20Wage%20Policy%20Memo)
+- [Minimum Wage Policy Memo](https://github.com/NatanielMoreau/Economic-Portfolio/tree/cbd3271a82196ed591a4ab057fbfb4180ebd0adb/Writing%20%26%20Interests/Minimum%20Wage%20Policy%20Memo)
 
 ### Group\Guided Work
 
