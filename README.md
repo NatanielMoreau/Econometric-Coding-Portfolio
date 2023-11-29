@@ -3,7 +3,7 @@
 ## About
 - Collection of projects, blogs, and assignments displaying my data skills including cleaning, generation, visualization, and analysis. Includes guided coursework as well as more independent projects in my areas of interest including environmetalism, healthcare, and educational equity. 
  
-- [*VISUALIZATIONS*](https://github.com/NatanielMoreau/Economic-Portfolio/blob/e4e46dec95ab576740160891bb2ec1c926eeb2c7/Visualizations/sample%20visualizations.pdf)
+- [***VISUALIZATIONS***](https://github.com/NatanielMoreau/Economic-Portfolio/blob/e4e46dec95ab576740160891bb2ec1c926eeb2c7/Visualizations/sample%20visualizations.pdf)
 
 ### Independent Projects
 
